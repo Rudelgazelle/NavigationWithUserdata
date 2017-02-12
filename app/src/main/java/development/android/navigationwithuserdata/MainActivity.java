@@ -1,6 +1,5 @@
 package development.android.navigationwithuserdata;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,8 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.v4.app.Fragment;
-
-import static android.support.v4.app.FragmentManagerImpl.FragmentTag.Fragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +43,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //add this line to display menu1 when the activity is loaded
+        displaySelectedScreen(R.id.nav_login);
     }
 
     @Override
@@ -80,12 +80,13 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void displaySelectedScreen(int id){
-        android.support.v4.app.Fragment fragment = null;
+    private void displaySelectedScreen(int itemId) {
 
+        //creating fragment object
         Fragment fragment = null;
 
-        switch(id){
+        //initializing the fragment object which is selected
+        switch (itemId) {
             case R.id.nav_login:
                 fragment = new LoginScreen();
                 break;
@@ -97,10 +98,10 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        if (fragment != null){
+        //replacing the fragment
+        if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_main, fragment);
-            ft.replace(R.id.content_main, fragment);
+            ft.replace(R.id.content_frame, fragment);
             ft.commit();
         }
 
@@ -111,22 +112,10 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_login) {
-            // Handle the camera action
-        } else if (id == R.id.nav_register) {
-
-        } else if (id == R.id.nav_userData) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        displaySelectedScreen(id);
+        //calling the method displayselectedscreen and passing the id of selected menu
+        displaySelectedScreen(item.getItemId());
+        //make this method blank
 
         return true;
     }

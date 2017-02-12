@@ -1,20 +1,21 @@
 package development.android.navigationwithuserdata;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by lbuer on 12.02.2017.
  */
 
-public class UserDataScreen extends android.support.v4.app.Fragment {
+public class UserDataScreen extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //returning our layout file
         return inflater.inflate(R.layout.userdata_screen, container, false);
     }
 
@@ -22,6 +23,7 @@ public class UserDataScreen extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("User Data");
     }
 }
